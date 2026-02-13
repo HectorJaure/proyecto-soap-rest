@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/wsdl", "destination": "/example.wsdl" }
+  ]
+}

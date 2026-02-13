@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CalculadoraService"
+    targetNamespace="http://www.ejemplo.com/wsdl"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://www.ejemplo.com/wsdl"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <message name="SumarRequest">
+        <part name="a" type="xsd:float"/>
+        <part name="b" type="xsd:float"/>
+    </message>
+    <message name="SumarResponse">
+        <part name="resultado" type="xsd:float"/>
+    </message>
+
+    <portType name="CalculadoraPortType">
+        <operation name="Sumar">
+            <input message="tns:SumarRequest"/>
+            <output message="tns:SumarResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="CalculadoraBinding" type="tns:CalculadoraPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="Sumar">
+            <soap:operation soapAction="Sumar"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <service name="CalculadoraService">
+        <port name="CalculadoraPort" binding="tns:CalculadoraBinding">
+            <soap:address location="https://tu-proyecto.vercel.app/api/soap"/>
+        </port>
+    </service>
+</definitions>
